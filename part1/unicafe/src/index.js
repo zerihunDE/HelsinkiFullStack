@@ -10,8 +10,7 @@ const Statstics =(props)=>{
             <div></div>
         )
     }
-    return(
-          
+    return( 
         <table>
             <tbody>
                 <Statstic text="good"  value={props.good}/>
@@ -21,21 +20,24 @@ const Statstics =(props)=>{
                 <Statstic text="average" value={average}/>
                 <Statstic text="positive" value={positive +'%'}/>
             </tbody>   
-        </table>
-        
-        
+        </table> 
     )
 }
+
 const Statstic = ({text,value})=>{
     return(
-        
         <tr>
             <td>{text}</td> 
             <td>{value}</td> 
         </tr>      
-        
     )
 }
+
+const Button = (props)=>{
+    return(
+        <button onClick = {props.handleClick}>{props.text}</button>
+    )
+}    
 
 
 const App = () => {
@@ -44,10 +46,12 @@ const App = () => {
     const [neutral, setNeutral] = useState(0)
     const [bad, setBad] = useState(0)
     const [count, setCount] = useState([])
+
     const handleGood =()=>{
         setGood(good+1)
         setCount(count.concat(1))
     }
+
     const handleNeutral =()=>{
             setNeutral(neutral+1)
             setCount(count.concat(0))
@@ -57,13 +61,14 @@ const App = () => {
             setBad(bad+1)
             setCount(count.concat(-1))
     }
+
     const total = count.length
     return (
         <div>
             <h1>give feedback</h1>
-            <button onClick={handleGood}>good</button>
-            <button onClick={handleNeutral}>neutral</button>
-            <button onClick={handleBad}>bad</button>
+            <Button handleClick={handleGood} text='good'/>
+            <Button handleClick={handleNeutral} text='neutral'/>
+            <Button handleClick={handleBad} text='bad'/>
             <h1>statstics</h1>
             <Statstics good={good} bad={bad} neutral={neutral}/>
             
